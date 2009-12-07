@@ -1,0 +1,185 @@
+NAME
+
+  openobject
+
+SYNOPSIS
+
+  a simple property based container that's much more capable than a blankslate
+  but far less polluted than ruby's built-in OpenStruct.  openobject is a tiny
+  lib that couples the power of the 'fattr' gem alongside a slightly
+  enhanced blankslate type object.
+
+INSTALL
+
+  gem install openobject
+
+URIS
+
+  http://codeforpeople.com/lib/ruby/
+  http://rubyforge.org/projects/codeforpeople/
+
+HISTORY
+
+  0.0.3
+    added support for default values
+
+SAMPLES
+
+  <========< sample/a.rb >========>
+
+  ~ > cat sample/a.rb
+
+    require 'openobject'
+    
+    oo = openobject
+    
+    oo.foo = 42
+    oo.bar 'forty-two'
+    
+    p oo.foo
+    p oo.bar
+
+  ~ > ruby sample/a.rb
+
+    42
+    "forty-two"
+
+
+  <========< sample/b.rb >========>
+
+  ~ > cat sample/b.rb
+
+    require 'openobject'
+    
+    oo = openobject :foo => 42, :bar => 'forty-two' do
+      foobar 42.0
+    end
+    
+    p oo.to_hash
+    p oo.fattrs
+
+  ~ > ruby sample/b.rb
+
+    {"foobar"=>42.0, "foo"=>42, "bar"=>"forty-two"}
+    ["foo", "bar", "foobar"]
+
+
+  <========< sample/c.rb >========>
+
+  ~ > cat sample/c.rb
+
+    require 'openobject'
+    
+    oo = openobject :foo => 42
+    
+    oo.bar = 'forty-two' 
+    
+    oo.extend do
+      fattr :foobar => 42.0
+    
+      def barfoo 
+        [ foo, bar, foobar ] 
+      end
+    end
+    
+    p oo.foobar
+    p oo.barfoo
+
+  ~ > ruby sample/c.rb
+
+    42.0
+    [42, "forty-two", 42.0]
+
+
+  <========< sample/d.rb >========>
+
+  ~ > cat sample/d.rb
+
+    require 'openobject'
+    
+    config =
+      oo{
+        header oo(:width => 42, :height => 42)
+        footer oo{ width 42.0; height 42.0 }
+      }
+    
+    p config.header.width
+    p config.footer.height
+
+  ~ > ruby sample/d.rb
+
+    42
+    42.0
+
+
+  <========< sample/e.rb >========>
+
+  ~ > cat sample/e.rb
+
+    require 'openobject'
+    
+    css = oo
+    
+    css.class = 'subtle'
+    css.style = 'display:none'
+
+  ~ > ruby sample/e.rb
+
+    
+
+  <========< sample/f.rb >========>
+
+  ~ > cat sample/f.rb
+
+    require 'openobject'
+    
+    # by default you cannot retrive unset values
+    #
+      o = oo
+      begin; o.foo; rescue NameError; p NameError; end
+     
+    #=> NameError
+    
+    # but you can set anything
+    #
+      o = oo
+      o.foo = 42
+      p o.foo
+     
+    #=> 42
+    
+    # blocks can extend openobjects
+    #
+      o = oo{ def bar() 42 end }
+      p o.bar
+     
+    #=> 42
+    
+    # you can set a default value which will be returned for anything
+    # missing value
+    #
+      o = oo{ default 42 }
+      p o.bar
+     
+    #=> 42
+    
+    # and the default value itself can be someting block/proc-like
+    #
+      n = 40
+      o = oo{ default{ n += 2 } }
+      p o.foo
+     
+    #=> 42
+
+  ~ > ruby sample/f.rb
+
+    NameError
+    42
+    42
+    42
+    42
+
+
+AUTHOR
+
+  ara.t.howard@gmail.com

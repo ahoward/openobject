@@ -1,0 +1,40 @@
+8
+
+dir
+673
+svn+ssh://ahoward@rubyforge.org/var/svn/codeforpeople/openobject/trunk/lib
+svn+ssh://ahoward@rubyforge.org/var/svn/codeforpeople
+
+
+
+2008-09-06T02:56:38.461503Z
+673
+ahoward
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+29922619-e960-4932-8d85-0e0be7f1775a
+
+openobject.rb
+file
+
+
+
+
+2008-09-06T02:56:42.000000Z
+8b22057692fa3c8c7e4ef39d8f77af29
+2008-09-06T02:56:38.461503Z
+673
+ahoward
+
