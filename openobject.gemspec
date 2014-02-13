@@ -6,7 +6,7 @@ Gem::Specification::new do |spec|
   spec.version = "1.0.0"
   spec.platform = Gem::Platform::RUBY
   spec.summary = "openobject"
-  spec.description = "description: openobject kicks the ass"
+  spec.description = "a simple property based container that's much more capable than a blankslate   but far less polluted than ruby's built-in OpenStruct"
 
   spec.files = ["install.rb", "lib", "lib/openobject.rb", "openobject.gemspec", "Rakefile", "README", "README.erb", "sample", "sample/a.rb", "sample/b.rb", "sample/c.rb", "sample/d.rb", "sample/e.rb", "sample/f.rb"]
   spec.executables = []
